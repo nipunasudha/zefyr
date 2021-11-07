@@ -7,6 +7,7 @@
 /// To use, `import 'package:zefyr/zefyr.dart';`.
 library zefyr;
 
+export 'package:notus/convert.dart';
 export 'package:notus/notus.dart';
 
 export 'src/rendering/editor.dart';
