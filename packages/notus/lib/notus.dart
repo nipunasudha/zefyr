@@ -5,6 +5,7 @@
 /// Rich text document model for Zefyr editor.
 library notus;
 
+export 'convert.dart';
 export 'src/document.dart';
 export 'src/document/attributes.dart';
 export 'src/document/block.dart';
