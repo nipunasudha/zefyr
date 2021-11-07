@@ -18,3 +18,4 @@ doc/api/
 build/
 
 example/feather
+.fvm/
