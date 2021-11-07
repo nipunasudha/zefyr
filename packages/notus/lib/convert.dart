@@ -5,8 +5,7 @@
 /// Provides codecs to convert Notus documents to other formats.
 library notus.convert;
 
-import 'package:notus/src/convert/html/notus_html_codec.dart';
-
+import 'src/convert/html/notus_html_codec.dart';
 import 'src/convert/markdown.dart';
 
 export 'src/convert/html/notus_html_codec.dart';
