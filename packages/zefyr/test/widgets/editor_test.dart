@@ -19,8 +19,7 @@ void main() {
         ..insert('\n');
       var doc = NotusDocument.fromDelta(delta);
       final BuildContext context = tester.element(find.byType(Container));
-      var theme = ZefyrThemeData.fallback(context)
-          .copyWith(link: TextStyle(color: Colors.red));
+      var theme = ZefyrThemeData.fallback(context).copyWith(link: const TextStyle(color: Colors.red));
       var editor = EditorSandBox(tester: tester, document: doc, theme: theme);
       await editor.pumpAndTap();
       // await tester.pumpAndSettle();
@@ -36,7 +35,7 @@ void main() {
       // expect(editor.findSelectionHandle(), findsNWidgets(2));
       await editor.unfocus();
       // expect(editor.findSelectionHandle(), findsNothing);
-      expect(editor.selection, TextSelection.collapsed(offset: 3));
+      expect(editor.selection, const TextSelection.collapsed(offset: 3));
     }, skip: true);
 
     testWidgets('toggle enabled state', (tester) async {

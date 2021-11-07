@@ -15,6 +15,8 @@ import 'layout_scrollable.dart';
 import 'settings.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key key}) : super(key: key);
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -54,7 +56,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _save() async {
-    final fs = LocalFileSystem();
+    const fs = LocalFileSystem();
     final file = fs.directory(_settings.assetsPath).childFile('welcome.note');
     final data = jsonEncode(_controller.document);
     await file.writeAsString(data);
@@ -63,7 +65,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     if (_settings == null || _controller == null) {
-      return Scaffold(body: Center(child: Text('Loading...')));
+      return const Scaffold(body: Center(child: Text('Loading...')));
     }
 
     return SettingsProvider(
@@ -79,12 +81,12 @@ class _HomePageState extends State<HomePage> {
           ),
           actions: [
             IconButton(
-              icon: Icon(Icons.settings, size: 16),
+              icon: const Icon(Icons.settings, size: 16),
               onPressed: _showSettings,
             ),
             if (_settings.assetsPath.isNotEmpty)
               IconButton(
-                icon: Icon(Icons.save, size: 16),
+                icon: const Icon(Icons.save, size: 16),
                 onPressed: _save,
               )
           ],
@@ -108,9 +110,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildMenuBar(BuildContext context) {
-    final headerStyle = TextStyle(
-        fontSize: 11, color: Colors.grey.shade500, fontWeight: FontWeight.bold);
-    final itemStyle = TextStyle(color: Colors.white);
+    final headerStyle = TextStyle(fontSize: 11, color: Colors.grey.shade500, fontWeight: FontWeight.bold);
+    const itemStyle = TextStyle(color: Colors.white);
     return ListView(
       children: [
         ListTile(
@@ -119,7 +120,7 @@ class _HomePageState extends State<HomePage> {
           visualDensity: VisualDensity.compact,
         ),
         ListTile(
-          title: Text('¶   Read only view', style: itemStyle),
+          title: const Text('¶   Read only view', style: itemStyle),
           dense: true,
           visualDensity: VisualDensity.compact,
           onTap: _readOnlyView,
@@ -130,13 +131,13 @@ class _HomePageState extends State<HomePage> {
           visualDensity: VisualDensity.compact,
         ),
         ListTile(
-          title: Text('¶   Expandable', style: itemStyle),
+          title: const Text('¶   Expandable', style: itemStyle),
           dense: true,
           visualDensity: VisualDensity.compact,
           onTap: _expanded,
         ),
         ListTile(
-          title: Text('¶   Custom scrollable', style: itemStyle),
+          title: const Text('¶   Custom scrollable', style: itemStyle),
           dense: true,
           visualDensity: VisualDensity.compact,
           onTap: _scrollable,
@@ -147,7 +148,7 @@ class _HomePageState extends State<HomePage> {
           visualDensity: VisualDensity.compact,
         ),
         ListTile(
-          title: Text('¶   Decorated field', style: itemStyle),
+          title: const Text('¶   Decorated field', style: itemStyle),
           dense: true,
           visualDensity: VisualDensity.compact,
           onTap: _decoratedField,
@@ -192,7 +193,7 @@ class _HomePageState extends State<HomePage> {
       MaterialPageRoute(
         builder: (BuildContext context) => SettingsProvider(
           settings: _settings,
-          child: ExpandedLayout(),
+          child: const ExpandedLayout(),
         ),
       ),
     );
@@ -204,7 +205,7 @@ class _HomePageState extends State<HomePage> {
       MaterialPageRoute(
         builder: (BuildContext context) => SettingsProvider(
           settings: _settings,
-          child: ReadOnlyView(),
+          child: const ReadOnlyView(),
         ),
       ),
     );
@@ -216,7 +217,7 @@ class _HomePageState extends State<HomePage> {
       MaterialPageRoute(
         builder: (BuildContext context) => SettingsProvider(
           settings: _settings,
-          child: ScrollableLayout(),
+          child: const ScrollableLayout(),
         ),
       ),
     );
@@ -228,7 +229,7 @@ class _HomePageState extends State<HomePage> {
       MaterialPageRoute(
         builder: (BuildContext context) => SettingsProvider(
           settings: _settings,
-          child: DecoratedFieldDemo(),
+          child: const DecoratedFieldDemo(),
         ),
       ),
     );

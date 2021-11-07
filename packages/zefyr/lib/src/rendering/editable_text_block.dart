@@ -195,12 +195,11 @@ class RenderEditableTextBlock extends RenderEditableContainerBox
     }
 
     final caretOffset = child.getOffsetForCaret(childLocalPosition);
-    final testPosition = TextPosition(offset: 0);
+    const testPosition = TextPosition(offset: 0);
     final testOffset = sibling.getOffsetForCaret(testPosition);
     final finalOffset = Offset(caretOffset.dx, testOffset.dy);
     final siblingLocalPosition = sibling.getPositionForOffset(finalOffset);
-    return TextPosition(
-        offset: sibling.node.offset + siblingLocalPosition.offset);
+    return TextPosition(offset: sibling.node.offset + siblingLocalPosition.offset);
   }
 
   @override

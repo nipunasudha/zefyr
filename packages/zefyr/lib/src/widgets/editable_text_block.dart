@@ -20,7 +20,7 @@ class EditableTextBlock extends StatelessWidget {
   final EdgeInsets? contentPadding;
   final ZefyrEmbedBuilder embedBuilder;
 
-  EditableTextBlock({
+  const EditableTextBlock({
     Key? key,
     required this.node,
     required this.spacing,
@@ -42,7 +42,7 @@ class EditableTextBlock extends StatelessWidget {
       node: node,
       padding: spacing,
       contentPadding: contentPadding,
-      decoration: _getDecorationForBlock(node, theme) ?? BoxDecoration(),
+      decoration: _getDecorationForBlock(node, theme) ?? const BoxDecoration(),
       children: _buildChildren(context),
     );
   }
@@ -281,7 +281,7 @@ class _BulletPoint extends StatelessWidget {
     return Container(
       alignment: AlignmentDirectional.topEnd,
       width: width,
-      padding: EdgeInsetsDirectional.only(end: 13.0),
+      padding: const EdgeInsetsDirectional.only(end: 13.0),
       child: Text('•', style: style),
     );
   }

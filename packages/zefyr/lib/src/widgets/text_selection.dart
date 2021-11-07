@@ -368,6 +368,7 @@ class EditorTextSelectionOverlay {
         break;
     }
     // TODO: update to use userUpdateTextEditingValue
+    // ignore: deprecated_member_use
     selectionDelegate!.textEditingValue =
         _value.copyWith(selection: newSelection, composing: TextRange.empty);
     selectionDelegate!.bringIntoView(textPosition);
@@ -1209,8 +1210,7 @@ class _EditorTextSelectionGestureDetectorState
         widget.onSingleLongTapEnd != null) {
       gestures[LongPressGestureRecognizer] =
           GestureRecognizerFactoryWithHandlers<LongPressGestureRecognizer>(
-        () => LongPressGestureRecognizer(
-            debugOwner: this, kind: PointerDeviceKind.touch),
+                () => LongPressGestureRecognizer(debugOwner: this, supportedDevices: <PointerDeviceKind>{PointerDeviceKind.touch}),
         (LongPressGestureRecognizer instance) {
           instance
             ..onLongPressStart = _handleLongPressStart
@@ -1227,8 +1227,8 @@ class _EditorTextSelectionGestureDetectorState
       // https://github.com/flutter/flutter/issues/28676
       gestures[HorizontalDragGestureRecognizer] =
           GestureRecognizerFactoryWithHandlers<HorizontalDragGestureRecognizer>(
-        () => HorizontalDragGestureRecognizer(
-            debugOwner: this, kind: PointerDeviceKind.mouse),
+                () => HorizontalDragGestureRecognizer(
+            debugOwner: this, supportedDevices: <PointerDeviceKind>{PointerDeviceKind.mouse}),
         (HorizontalDragGestureRecognizer instance) {
           instance
             // Text selection should start from the position of the first pointer

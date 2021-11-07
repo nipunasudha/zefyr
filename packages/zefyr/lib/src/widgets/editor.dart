@@ -452,7 +452,7 @@ class _ZefyrEditorSelectionGestureDetectorBuilder
 }
 
 class RawEditor extends StatefulWidget {
-  RawEditor({
+  const RawEditor({
     Key? key,
     required this.controller,
     this.focusNode,
@@ -805,7 +805,7 @@ class RawEditorState extends EditorState
     _cursorController = CursorController(
       showCursor: ValueNotifier<bool>(widget.showCursor),
       style: widget.cursorStyle ??
-          CursorStyle(
+          const CursorStyle(
             // TODO: fallback to current theme's accent color
             color: Colors.blueAccent,
             backgroundColor: Colors.grey,
@@ -1050,8 +1050,7 @@ class RawEditorState extends EditorState
       }
 
       final viewport = RenderAbstractViewport.of(renderEditor)!;
-      final editorOffset =
-          renderEditor.localToGlobal(Offset(0.0, 0.0), ancestor: viewport);
+      final editorOffset = renderEditor.localToGlobal(const Offset(0.0, 0.0), ancestor: viewport);
       final offsetInViewport = _scrollController.offset + editorOffset.dy;
 
       final offset = renderEditor.getOffsetToRevealCursor(
@@ -1139,10 +1138,8 @@ class RawEditorState extends EditorState
     }
 
     final constraints = widget.expands
-        ? BoxConstraints.expand()
-        : BoxConstraints(
-            minHeight: widget.minHeight ?? 0.0,
-            maxHeight: widget.maxHeight ?? double.infinity);
+        ? const BoxConstraints.expand()
+        : BoxConstraints(minHeight: widget.minHeight ?? 0.0, maxHeight: widget.maxHeight ?? double.infinity);
 
     return ZefyrTheme(
       data: _themeData,
@@ -1191,9 +1188,7 @@ class RawEditorState extends EditorState
             selectionColor: widget.selectionColor,
             enableInteractiveSelection: widget.enableInteractiveSelection,
             hasFocus: _hasFocus,
-            contentPadding: (block == NotusAttribute.block.code)
-                ? EdgeInsets.all(16.0)
-                : null,
+            contentPadding: (block == NotusAttribute.block.code) ? const EdgeInsets.all(16.0) : null,
             embedBuilder: widget.embedBuilder,
           ),
         ));
@@ -1304,12 +1299,5 @@ class _Editor extends MultiChildRenderObjectWidget {
     renderObject.endHandleLayerLink = endHandleLayerLink;
     renderObject.onSelectionChanged = onSelectionChanged;
     renderObject.padding = padding;
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    // TODO
-//    properties.add(EnumProperty<Axis>('direction', direction));
   }
 }

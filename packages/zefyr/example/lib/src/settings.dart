@@ -19,7 +19,7 @@ class Settings {
       return Settings(assetsPath: '');
     }
 
-    final fs = LocalFileSystem();
+    const fs = LocalFileSystem();
     final dir = await pp.getApplicationSupportDirectory();
     final file = fs.directory(dir.path).childFile('settings.json');
     if (await file.exists()) {
@@ -40,7 +40,7 @@ class Settings {
     if (kIsWeb) {
       return;
     }
-    final fs = LocalFileSystem();
+    const fs = LocalFileSystem();
     final dir = await pp.getApplicationSupportDirectory();
     final file = fs.directory(dir.path).childFile('settings.json');
     final data = {'assetsPath': assetsPath};
@@ -76,12 +76,12 @@ class _SettingsDialogState extends State<SettingsDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Settings'),
+      title: const Text('Settings'),
       content: Container(
-        constraints: BoxConstraints(minWidth: 400),
+        constraints: const BoxConstraints(minWidth: 400),
         child: TextField(
           controller: _assetsPathController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             labelText: 'Path to assets folder',
             helperText:
                 'When set, allows to edit and save documents used in examples from within the app. Only useful if you are a developer of Zefyr package.',
@@ -90,7 +90,7 @@ class _SettingsDialogState extends State<SettingsDialog> {
           onChanged: _assetsPathChanged,
         ),
       ),
-      actions: [TextButton(onPressed: _save, child: Text('Save'))],
+      actions: [TextButton(onPressed: _save, child: const Text('Save'))],
     );
   }
 
@@ -112,8 +112,7 @@ class _SettingsDialogState extends State<SettingsDialog> {
 class SettingsProvider extends InheritedWidget {
   final Settings settings;
 
-  SettingsProvider({Key key, this.settings, Widget child})
-      : super(key: key, child: child);
+  const SettingsProvider({Key key, this.settings, Widget child}) : super(key: key, child: child);
 
   @override
   bool updateShouldNotify(covariant SettingsProvider oldWidget) {

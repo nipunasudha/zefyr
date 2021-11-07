@@ -439,7 +439,7 @@ class RenderEditableTextLine extends RenderEditableBox {
       _cursorController.style.height ??
       // hard code position to 0 here but it really doesn't matter since it's
       // the same for the entire paragraph of text.
-      preferredLineHeight(TextPosition(offset: 0));
+      preferredLineHeight(const TextPosition(offset: 0));
 
   /// We cache containsCursor value because this method depends on the node
   /// state. In some cases the node gets detached from its document before this

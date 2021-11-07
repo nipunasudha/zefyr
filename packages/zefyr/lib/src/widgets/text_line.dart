@@ -71,7 +71,7 @@ class TextLine extends StatelessWidget {
   }
 
   TextStyle _getParagraphTextStyle(NotusStyle style, ZefyrThemeData theme) {
-    var textStyle = TextStyle();
+    var textStyle = const TextStyle();
     final heading = node.style.get(NotusAttribute.heading);
     if (heading == NotusAttribute.heading.level1) {
       textStyle = textStyle.merge(theme.heading1.style);
@@ -110,7 +110,7 @@ class TextLine extends StatelessWidget {
   }
 
   TextStyle _getInlineTextStyle(NotusStyle style, ZefyrThemeData theme) {
-    var result = TextStyle();
+    var result = const TextStyle();
     if (style.containsSame(NotusAttribute.bold)) {
       result = _mergeTextStyleWithDecoration(result, theme.bold);
     }

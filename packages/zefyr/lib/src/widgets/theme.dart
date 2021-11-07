@@ -21,7 +21,7 @@ class ZefyrTheme extends InheritedWidget {
   /// Applies the given theme [data] to [child].
   ///
   /// The [data] and [child] arguments must not be null.
-  ZefyrTheme({
+  const ZefyrTheme({
     Key? key,
     required this.data,
     required Widget child,
@@ -121,7 +121,7 @@ class ZefyrThemeData {
       fontSize: 16.0,
       height: 1.3,
     );
-    final baseSpacing = VerticalSpacing(top: 6.0, bottom: 10);
+    const baseSpacing = VerticalSpacing(top: 6.0, bottom: 10);
 
     String fontFamily;
     switch (themeData.platform) {
@@ -138,10 +138,10 @@ class ZefyrThemeData {
     }
 
     return ZefyrThemeData(
-      bold: TextStyle(fontWeight: FontWeight.bold),
-      italic: TextStyle(fontStyle: FontStyle.italic),
-      underline: TextStyle(decoration: TextDecoration.underline),
-      strikethrough: TextStyle(decoration: TextDecoration.lineThrough),
+      bold: const TextStyle(fontWeight: FontWeight.bold),
+      italic: const TextStyle(fontStyle: FontStyle.italic),
+      underline: const TextStyle(decoration: TextDecoration.underline),
+      strikethrough: const TextStyle(decoration: TextDecoration.lineThrough),
       inlineCode: InlineCodeThemeData(TextStyle(
         color: Colors.blue.shade900.withOpacity(0.9),
         fontFamily: fontFamily,
@@ -162,7 +162,7 @@ class ZefyrThemeData {
           height: 1.15,
           fontWeight: FontWeight.w300,
         ),
-        spacing: VerticalSpacing(top: 16.0, bottom: 0.0),
+        spacing: const VerticalSpacing(top: 16.0, bottom: 0.0),
       ),
       heading2: TextBlockTheme(
         style: TextStyle(
@@ -171,7 +171,7 @@ class ZefyrThemeData {
           height: 1.15,
           fontWeight: FontWeight.normal,
         ),
-        spacing: VerticalSpacing(bottom: 0.0, top: 8.0),
+        spacing: const VerticalSpacing(bottom: 0.0, top: 8.0),
       ),
       heading3: TextBlockTheme(
         style: TextStyle(
@@ -180,17 +180,17 @@ class ZefyrThemeData {
           height: 1.25,
           fontWeight: FontWeight.w500,
         ),
-        spacing: VerticalSpacing(bottom: 0.0, top: 8.0),
+        spacing: const VerticalSpacing(bottom: 0.0, top: 8.0),
       ),
       lists: TextBlockTheme(
         style: baseStyle,
         spacing: baseSpacing,
-        lineSpacing: VerticalSpacing(bottom: 6),
+        lineSpacing: const VerticalSpacing(bottom: 6),
       ),
       quote: TextBlockTheme(
         style: TextStyle(color: baseStyle.color?.withOpacity(0.6)),
         spacing: baseSpacing,
-        lineSpacing: VerticalSpacing(top: 6, bottom: 2),
+        lineSpacing: const VerticalSpacing(top: 6, bottom: 2),
         decoration: BoxDecoration(
           border: BorderDirectional(
             start: BorderSide(width: 4, color: Colors.grey.shade300),

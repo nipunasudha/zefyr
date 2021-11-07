@@ -277,21 +277,21 @@ void main() {
 
     test('preserves heading style of the original line', () {
       final quote = NotusAttribute.block.quote.toJson();
-      final h1_unset = NotusAttribute.heading.unset.toJson();
-      final quote_h1 = NotusAttribute.block.quote.toJson();
-      quote_h1.addAll(NotusAttribute.heading.level1.toJson());
+      final h1Unset = NotusAttribute.heading.unset.toJson();
+      final quoteH1 = NotusAttribute.block.quote.toJson();
+      quoteH1.addAll(NotusAttribute.heading.level1.toJson());
       final doc = Delta()
         ..insert('One and two')
-        ..insert('\n', quote_h1)
+        ..insert('\n', quoteH1)
         ..insert('Three')
         ..insert('\n', quote);
       final actual = rule.apply(doc, 8, '111\n');
       final expected = Delta()
         ..retain(8)
         ..insert('111')
-        ..insert('\n', quote_h1)
+        ..insert('\n', quoteH1)
         ..retain(3)
-        ..retain(1, h1_unset);
+        ..retain(1, h1Unset);
       expect(actual, expected);
     });
   });

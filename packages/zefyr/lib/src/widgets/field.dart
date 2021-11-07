@@ -139,7 +139,7 @@ class ZefyrField extends StatefulWidget {
   /// Defaults to [defaultZefyrEmbedBuilder].
   final ZefyrEmbedBuilder embedBuilder;
 
-  ZefyrField({
+  const ZefyrField({
     Key? key,
     required this.controller,
     this.focusNode,

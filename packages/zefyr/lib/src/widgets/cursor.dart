@@ -107,15 +107,13 @@ class CursorStyle {
 /// cursor [style].
 class CursorController extends ChangeNotifier {
   CursorController({
-    required ValueNotifier<bool> showCursor,
+    required this.showCursor,
     required CursorStyle style,
     required TickerProvider tickerProvider,
-  })  : showCursor = showCursor,
-        _style = style,
+  })  : _style = style,
         _cursorBlink = ValueNotifier(false),
         _cursorColor = ValueNotifier(style.color) {
-    _cursorBlinkOpacityController =
-        AnimationController(vsync: tickerProvider, duration: _fadeDuration);
+    _cursorBlinkOpacityController = AnimationController(vsync: tickerProvider, duration: _fadeDuration);
     _cursorBlinkOpacityController.addListener(_onCursorColorTick);
   }
 
