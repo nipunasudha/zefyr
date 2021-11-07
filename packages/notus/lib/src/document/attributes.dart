@@ -78,7 +78,6 @@ abstract class NotusAttributeBuilder<T> implements NotusAttributeKey<T> {
 ///   * [NotusAttribute.color]
 ///   * [NotusAttribute.backgroundColor]
 ///   * [NotusAttribute.heading]
-///   * [NotusAttribute.checked]
 ///   * [NotusAttribute.indent]
 ///   * [NotusAttribute.alignment]
 ///   * [NotusAttribute.block]
@@ -96,7 +95,6 @@ class NotusAttribute<T> implements NotusAttributeBuilder<T> {
     NotusAttribute.color.key: NotusAttribute.color,
     NotusAttribute.backgroundColor.key: NotusAttribute.backgroundColor,
     NotusAttribute.heading.key: NotusAttribute.heading,
-    NotusAttribute.checked.key: NotusAttribute.checked,
     NotusAttribute.indent.key: NotusAttribute.indent,
     NotusAttribute.alignment.key: NotusAttribute.alignment,
     NotusAttribute.block.key: NotusAttribute.block,
@@ -176,13 +174,6 @@ class NotusAttribute<T> implements NotusAttributeBuilder<T> {
 
   /// Alias for [NotusAttribute.block.numberList].
   static NotusAttribute<String> get ol => block.numberList;
-
-  /// Alias for [NotusAttribute.block.checkList].
-  static NotusAttribute<String> get cl => block.checkList;
-
-  /// Checked style attribute.
-  // ignore: const_eval_throws_exception
-  static const checked = _CheckedAttribute();
 
   /// Alias for [NotusAttribute.block.quote].
   static NotusAttribute<String> get bq => block.quote;
@@ -496,15 +487,6 @@ class HeadingAttributeBuilder extends NotusAttributeBuilder<int> {
   NotusAttribute<int> get level3 => NotusAttribute<int>._(key, scope, 3);
 }
 
-///
-/// There is no need to use this class directly, consider using
-/// [NotusAttribute.checked] instead.
-class _CheckedAttribute extends NotusAttribute<bool> {
-  static const _kChecked = 'checked';
-
-  const _CheckedAttribute() : super._(_kChecked, NotusAttributeScope.line, true);
-}
-
 /// Builder for indent attribute values.
 ///
 /// There is no need to use this class directly, consider using
@@ -551,9 +533,6 @@ class BlockAttributeBuilder extends NotusAttributeBuilder<String> {
 
   /// Formats a block of lines as a number list.
   NotusAttribute<String> get numberList => NotusAttribute<String>._(key, scope, 'ol');
-
-  /// Formats a block of lines as a checkbox list.
-  NotusAttribute<String> get checkList => NotusAttribute<String>._(key, scope, 'cl');
 
   /// Formats a block of lines as a code snippet, using monospace font.
   NotusAttribute<String> get code => NotusAttribute<String>._(key, scope, 'code');
