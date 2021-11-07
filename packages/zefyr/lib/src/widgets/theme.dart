@@ -147,7 +147,7 @@ class ZefyrThemeData {
         fontFamily: fontFamily,
       )),
       link: TextStyle(
-        color: themeData.accentColor,
+        color: themeData.colorScheme.secondary,
         decoration: TextDecoration.underline,
       ),
       paragraph: TextBlockTheme(

@@ -61,11 +61,12 @@ class EditableTextBlock extends StatelessWidget {
           node: line,
           spacing: _getSpacingForLine(line, index, count, theme),
           leading: _buildLeading(context, line, index, count),
-          indentWidth: _getIndentWidth(),
+          indentWidth: _getIndentWidth(line),
           devicePixelRatio: MediaQuery.of(context).devicePixelRatio,
           body: TextLine(
             node: line,
             embedBuilder: embedBuilder,
+            textAlign: _buildParagraphAlignment(line),
           ),
           cursorController: cursorController,
           selection: selection,
@@ -78,8 +79,20 @@ class EditableTextBlock extends StatelessWidget {
     return children.toList(growable: false);
   }
 
-  Widget? _buildLeading(
-      BuildContext context, LineNode node, int index, int count) {
+  TextAlign _buildParagraphAlignment(LineNode node) {
+    final alignment = node.style.get(NotusAttribute.alignment);
+    if (alignment == NotusAttribute.alignment.end) {
+      return TextAlign.end;
+    } else if (alignment == NotusAttribute.alignment.justify) {
+      return TextAlign.justify;
+    } else if (alignment == NotusAttribute.alignment.center) {
+      return TextAlign.center;
+    } else {
+      return TextAlign.start;
+    }
+  }
+
+  Widget? _buildLeading(BuildContext context, LineNode node, int index, int count) {
     final theme = ZefyrTheme.of(context)!;
     final block = node.style.get(NotusAttribute.block);
     if (block == NotusAttribute.block.numberList) {
@@ -99,8 +112,7 @@ class EditableTextBlock extends StatelessWidget {
       return _NumberPoint(
         index: index,
         count: count,
-        style: theme.code.style
-            .copyWith(color: theme.code.style.color?.withOpacity(0.4)),
+        style: theme.code.style.copyWith(color: theme.code.style.color?.withOpacity(0.4)),
         width: 32.0,
         padding: 16.0,
         withDot: false,
@@ -110,14 +122,19 @@ class EditableTextBlock extends StatelessWidget {
     }
   }
 
-  double _getIndentWidth() {
+  double _getIndentWidth(LineNode line) {
+    var additionalIndent = 0;
+    final indent = line.style.get(NotusAttribute.indent);
+    if (indent != null) {
+      additionalIndent = indent.value!;
+    }
     final block = node.style.get(NotusAttribute.block);
     if (block == NotusAttribute.block.quote) {
-      return 16.0;
+      return 16.0 + additionalIndent;
     } else if (block == NotusAttribute.block.code) {
-      return 32.0;
+      return 32.0 + additionalIndent;
     } else {
-      return 32.0;
+      return 32.0 + additionalIndent;
     }
   }
 

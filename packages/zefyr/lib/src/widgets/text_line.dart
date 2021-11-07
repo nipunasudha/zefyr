@@ -15,11 +15,13 @@ class TextLine extends StatelessWidget {
   /// Line of text represented by this widget.
   final LineNode node;
   final ZefyrEmbedBuilder embedBuilder;
+  final TextAlign textAlign;
 
   const TextLine({
     Key? key,
     required this.node,
     required this.embedBuilder,
+    required this.textAlign,
   }) : super(key: key);
 
   @override
@@ -31,14 +33,16 @@ class TextLine extends StatelessWidget {
       return EmbedProxy(child: embedBuilder(context, embed));
     }
     final text = buildText(context, node);
-    final strutStyle =
-        StrutStyle.fromTextStyle(text.style!, forceStrutHeight: true);
+    final strutStyle = StrutStyle.fromTextStyle(text.style!, forceStrutHeight: true);
+    final textAlign = _getParagraphTextAlign(node.style);
     return RichTextProxy(
       textStyle: text.style!,
+      textAlign: textAlign,
       strutStyle: strutStyle,
       locale: Localizations.maybeLocaleOf(context),
       child: RichText(
         text: buildText(context, node),
+        textAlign: textAlign,
         strutStyle: strutStyle,
         textScaleFactor: MediaQuery.textScaleFactorOf(context),
       ),
@@ -92,6 +96,19 @@ class TextLine extends StatelessWidget {
     return textStyle;
   }
 
+  TextAlign _getParagraphTextAlign(NotusStyle style) {
+    final alignment = style.get(NotusAttribute.alignment);
+    if (alignment == NotusAttribute.alignment.end) {
+      return TextAlign.end;
+    } else if (alignment == NotusAttribute.alignment.justify) {
+      return TextAlign.justify;
+    } else if (alignment == NotusAttribute.alignment.center) {
+      return TextAlign.center;
+    } else {
+      return TextAlign.start;
+    }
+  }
+
   TextStyle _getInlineTextStyle(NotusStyle style, ZefyrThemeData theme) {
     var result = TextStyle();
     if (style.containsSame(NotusAttribute.bold)) {
@@ -102,6 +119,18 @@ class TextLine extends StatelessWidget {
     }
     if (style.contains(NotusAttribute.link)) {
       result = _mergeTextStyleWithDecoration(result, theme.link);
+    }
+    if (style.contains(NotusAttribute.fontSize)) {
+      result = result.merge(TextStyle(fontSize: style.get(NotusAttribute.fontSize)!.value!.toDouble()));
+    }
+    if (style.contains(NotusAttribute.fontFamily)) {
+      result = result.merge(TextStyle(fontFamily: style.get(NotusAttribute.fontFamily)!.value));
+    }
+    if (style.contains(NotusAttribute.color)) {
+      result = result.merge(TextStyle(color: Color(style.get(NotusAttribute.color)!.value!)));
+    }
+    if (style.contains(NotusAttribute.backgroundColor)) {
+      result = result.merge(TextStyle(backgroundColor: Color(style.get(NotusAttribute.backgroundColor)!.value!)));
     }
     if (style.contains(NotusAttribute.underline)) {
       result = _mergeTextStyleWithDecoration(result, theme.underline);

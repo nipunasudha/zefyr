@@ -1164,7 +1164,7 @@ class RawEditorState extends EditorState
           textDirection: getDirectionOfNode(node),
           child: EditableTextLine(
             node: node,
-            indentWidth: 0,
+            indentWidth: _getIndentWidth(node),
             spacing: _getSpacingForLine(node, _themeData),
             cursorController: _cursorController,
             selection: widget.controller.selection,
@@ -1173,6 +1173,7 @@ class RawEditorState extends EditorState
             body: TextLine(
               node: node,
               embedBuilder: widget.embedBuilder,
+              textAlign: _buildParagraphAlignment(node),
             ),
             hasFocus: _hasFocus,
             devicePixelRatio: MediaQuery.of(context).devicePixelRatio,
@@ -1201,6 +1202,28 @@ class RawEditorState extends EditorState
       }
     }
     return result;
+  }
+
+  TextAlign _buildParagraphAlignment(LineNode node) {
+    final alignment = node.style.get(NotusAttribute.alignment);
+    if (alignment == NotusAttribute.alignment.end) {
+      return TextAlign.end;
+    } else if (alignment == NotusAttribute.alignment.justify) {
+      return TextAlign.justify;
+    } else if (alignment == NotusAttribute.alignment.center) {
+      return TextAlign.center;
+    } else {
+      return TextAlign.start;
+    }
+  }
+
+  double _getIndentWidth(LineNode line) {
+    final indent = line.style.get(NotusAttribute.indent);
+    if (indent != null) {
+      return indent.value!.toDouble();
+    } else {
+      return 0;
+    }
   }
 
   VerticalSpacing _getSpacingForLine(LineNode node, ZefyrThemeData theme) {
