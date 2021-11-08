@@ -379,6 +379,7 @@ mixin RawEditorStateKeyboardMixin on EditorState {
   }
 
   void handleDelete(bool forward) {
+    if (widget.readOnly) return;
     final selection = widget.controller.selection;
     final plainText = textEditingValue.text;
     int cursorPosition = selection.start;
@@ -388,7 +389,7 @@ mixin RawEditorStateKeyboardMixin on EditorState {
     if (selection.isCollapsed) {
       if (!forward && textBefore.isNotEmpty) {
         final int characterBoundary =
-            previousCharacter(textBefore.length, textBefore);
+        previousCharacter(textBefore.length, textBefore);
         textBefore = textBefore.substring(0, characterBoundary);
         cursorPosition = characterBoundary;
       }
