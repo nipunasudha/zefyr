@@ -390,7 +390,7 @@ class RenderEditor extends RenderEditableContainerBox implements RenderAbstractE
       start: localWord.start + nodeOffset,
       end: localWord.end + nodeOffset,
     );
-    if (position.offset - word.start <= 1) {
+    if ((position.offset - word.start).abs() < (position.offset - word.end).abs()) {
       _handleSelectionChange(
         TextSelection.collapsed(offset: word.start, affinity: TextAffinity.downstream),
         cause,
