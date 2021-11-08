@@ -51,9 +51,7 @@ class TextLine extends StatelessWidget {
 
   TextSpan buildText(BuildContext context, LineNode node) {
     final theme = ZefyrTheme.of(context)!;
-    final children = node.children
-        .map((node) => _segmentToTextSpan(node, theme))
-        .toList(growable: false);
+    final children = node.children.map((node) => _segmentToTextSpan(node, theme)).toList(growable: false);
     return TextSpan(
       style: _getParagraphTextStyle(node.style, theme),
       children: children,
@@ -64,9 +62,15 @@ class TextLine extends StatelessWidget {
     final segment = node as TextNode;
     final attrs = segment.style;
 
+    MouseCursor? cursor;
+    if (attrs.contains(NotusAttribute.link)) {
+      cursor = SystemMouseCursors.click;
+    }
+
     return TextSpan(
       text: segment.value,
       style: _getInlineTextStyle(attrs, theme),
+      mouseCursor: cursor,
     );
   }
 
